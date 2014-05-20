@@ -41,7 +41,7 @@ public class ManageCustomer
     //    return vehicleCmd;
     //}
 
-    private SqlCommand WriteRegisteredDonor()
+    private SqlCommand WriteRegisteredDonor(Donor d)
     {
         string sqlRegisteredDonor = "Insert into Donor.RegisteredDonor(Email, DonorPasscode, "
             + "DonorPassword, DonorHashedPassword, PersonKey)"
@@ -69,7 +69,7 @@ public class ManageCustomer
 
         SqlCommand pCmd = WritePerson();
         //SqlCommand vCmd = WriteVehicle();
-        SqlCommand rCmd = WriteRegisteredDonor();
+        SqlCommand rCmd = WriteRegisteredDonor(d);
 
         connect.Open();
         try
