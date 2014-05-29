@@ -21,14 +21,27 @@ public class ManageCustomer
 
     private SqlCommand WritePerson()
     {
-        string sqlPerson = "Insert into Person(LastName, FirstName) Values(@lastName, @FirstName)";
+        string sqlPerson = "Insert into Person(PersonLastName, PersonFirstName, PersonUserName, PersonUserPassword, "
+            + "PersonPlainPassword, PersonPassKey)"
+            + "Values(@LastName, @FirstName, @Email, @hashedpass, @password, @Passcode)";
+
+        PasscodeGenerator pg = new PasscodeGenerator();
+        PasswordHash ph = new PasswordHash();
+        int Passcode = pg.GetPasscode();
+
         SqlCommand personCmd = new SqlCommand(sqlPerson, connect);
         personCmd.Parameters.AddWithValue("@LastName", d.LastName);
         personCmd.Parameters.AddWithValue("@FirstName", d.FirstName);
+        personCmd.Parameters.AddWithValue("@Email", d.Email);
+        personCmd.Parameters.AddWithValue("@Passcode", Passcode);
+        personCmd.Parameters.AddWithValue("@password", d.PlainPassword);
+        personCmd.Parameters.AddWithValue("@hashedPass", ph.HashIt(d.PlainPassword.ToString(), Passcode.ToString()));
 
         return personCmd;
     }
 
+<<<<<<< HEAD
+=======
     //private SqlCommand WriteVehicle()
     //{
     //    string sqlVehicle = "Insert into Customer.Vehicle(LicenseNumber, VehicleMake, VehicleYear, PersonKey)" +
@@ -46,20 +59,8 @@ public class ManageCustomer
         string sqlRegisteredDonor = "Insert into Donor.RegisteredDonor(Email, DonorPasscode, "
             + "DonorPassword, DonorHashedPassword, PersonKey)"
             + "Values(@Email, @Passcode, @password, @hashedpass, ident_Current('Person'))";
+>>>>>>> parent of ffbd70d... Not registering
 
-        PasscodeGenerator pg = new PasscodeGenerator();
-        PasswordHash ph = new PasswordHash();
-        int Passcode = pg.GetPasscode();
-
-        SqlCommand regDonorCmd = new SqlCommand(sqlRegisteredDonor, connect);
-        regDonorCmd.Parameters.AddWithValue("@Email", d.Email);
-        regDonorCmd.Parameters.AddWithValue("@Passcode", Passcode);
-        regDonorCmd.Parameters.AddWithValue("@password", d.PlainPassword);
-        regDonorCmd.Parameters.AddWithValue("@hashedPass", ph.HashIt(d.PlainPassword.ToString(), Passcode.ToString()));
-
-        return regDonorCmd;
-
-    }
 
     public void WriteDonor(Donor d)
     {
@@ -68,19 +69,18 @@ public class ManageCustomer
         SqlTransaction tran = null;
 
         SqlCommand pCmd = WritePerson();
+<<<<<<< HEAD
+=======
         //SqlCommand vCmd = WriteVehicle();
         SqlCommand rCmd = WriteRegisteredDonor();
+>>>>>>> parent of ffbd70d... Not registering
 
         connect.Open();
         try
         {
             tran = connect.BeginTransaction();
             pCmd.Transaction = tran;
-            //vCmd.Transaction = tran;
-            rCmd.Transaction = tran;
             pCmd.ExecuteNonQuery();
-            //vCmd.ExecuteNonQuery();
-            rCmd.ExecuteNonQuery();
             tran.Commit();
         }
         catch (Exception ex)
