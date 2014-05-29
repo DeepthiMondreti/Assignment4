@@ -24,6 +24,8 @@ public partial class _Default : System.Web.UI.Page
         donor.PlainPassword = txtPassword.Text;
         donor.Donation = double.Parse(txtDonation.Text);
 
+        ManageCustomer mc = new ManageCustomer();
+        mc.WriteDonor(donor);
         //we create a session variable to store our class
         //with all the values in it
         //so we can access it on other pages

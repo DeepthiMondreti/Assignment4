@@ -41,6 +41,7 @@ public class ManageCustomer
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     //private SqlCommand WriteVehicle()
     //{
@@ -60,6 +61,8 @@ public class ManageCustomer
             + "DonorPassword, DonorHashedPassword, PersonKey)"
             + "Values(@Email, @Passcode, @password, @hashedpass, ident_Current('Person'))";
 >>>>>>> parent of ffbd70d... Not registering
+=======
+>>>>>>> 6177b1f0223ca0f56d25d068fe4b8fd6425f6c69
 
 
     public void WriteDonor(Donor d)
@@ -70,10 +73,13 @@ public class ManageCustomer
 
         SqlCommand pCmd = WritePerson();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         //SqlCommand vCmd = WriteVehicle();
         SqlCommand rCmd = WriteRegisteredDonor();
 >>>>>>> parent of ffbd70d... Not registering
+=======
+>>>>>>> 6177b1f0223ca0f56d25d068fe4b8fd6425f6c69
 
         connect.Open();
         try

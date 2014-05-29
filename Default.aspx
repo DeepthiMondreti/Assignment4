@@ -34,7 +34,7 @@
             <td>
                 <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox></td>
             <td>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtDonation" Display="None" ErrorMessage="Must enter a Email"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Must enter a Email"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtEmail" ErrorMessage="Invalid email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Display="None"></asp:RegularExpressionValidator>
                 </td>
         </tr>
@@ -43,7 +43,7 @@
             <td>
                 <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox></td>
             <td>
-             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtDonation" Display="None" ErrorMessage="Must enter a password"></asp:RequiredFieldValidator>   
+             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtPassword" Display="None" ErrorMessage="Must enter a password"></asp:RequiredFieldValidator>   
                 </td>
         </tr>
 
