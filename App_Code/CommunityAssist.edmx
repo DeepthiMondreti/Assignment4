@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CommunityAssistModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="CommunityAssistModelStoreContainer">
+          <EntitySet Name="Donation" EntityType="CommunityAssistModel.Store.Donation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Person" EntityType="CommunityAssistModel.Store.Person" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ServiceGrant" EntityType="CommunityAssistModel.Store.ServiceGrant" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Donation__Person__5CD6CB2B" Association="CommunityAssistModel.Store.FK__Donation__Person__5CD6CB2B">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Donation" EntitySet="Donation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceGr__Perso__239E4DCF" Association="CommunityAssistModel.Store.FK__ServiceGr__Perso__239E4DCF">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="ServiceGrant" EntitySet="ServiceGrant" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Donation">
+          <Key>
+            <PropertyRef Name="DonationKey" />
+          </Key>
+          <Property Name="DonationKey" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DonationDate" Type="datetime" Nullable="false" />
+          <Property Name="DonationAmount" Type="money" Nullable="false" />
+          <Property Name="PersonKey" Type="int" />
+          <Property Name="EmployeeKey" Type="int" />
+          <Property Name="DonationConfirmDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonKey" />
+          </Key>
+          <Property Name="PersonKey" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PersonLastName" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="PersonFirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="PersonUsername" Type="nvarchar" MaxLength="25" />
+          <Property Name="PersonPlainPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="Personpasskey" Type="int" />
+          <Property Name="PersonEntryDate" Type="date" />
+          <Property Name="PersonUserPassword" Type="varbinary" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="ServiceGrant">
+          <Key>
+            <PropertyRef Name="GrantKey" />
+          </Key>
+          <Property Name="GrantKey" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GrantAmount" Type="money" />
+          <Property Name="GrantDate" Type="datetime" />
+          <Property Name="PersonKey" Type="int" />
+          <Property Name="ServiceKey" Type="int" />
+          <Property Name="EmployeeKey" Type="int" />
+          <Property Name="GrantReviewDate" Type="date" />
+          <Property Name="GrantApprovalStatus" Type="nvarchar" MaxLength="10" />
+          <Property Name="GrantNeedExplanation" Type="nvarchar(max)" />
+          <Property Name="GrantAllocation" Type="money" />
+        </EntityType>
+        <Association Name="FK__Donation__Person__5CD6CB2B">
+          <End Role="Person" Type="CommunityAssistModel.Store.Person" Multiplicity="0..1" />
+          <End Role="Donation" Type="CommunityAssistModel.Store.Donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonKey" />
+            </Principal>
+            <Dependent Role="Donation">
+              <PropertyRef Name="PersonKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceGr__Perso__239E4DCF">
+          <End Role="Person" Type="CommunityAssistModel.Store.Person" Multiplicity="0..1" />
+          <End Role="ServiceGrant" Type="CommunityAssistModel.Store.ServiceGrant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonKey" />
+            </Principal>
+            <Dependent Role="ServiceGrant">
+              <PropertyRef Name="PersonKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CommunityAssistModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CommunityAssistEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Donations" EntityType="CommunityAssistModel.Donation" />
+          <EntitySet Name="People" EntityType="CommunityAssistModel.Person" />
+          <EntitySet Name="ServiceGrants" EntityType="CommunityAssistModel.ServiceGrant" />
+          <AssociationSet Name="FK__Donation__Person__5CD6CB2B" Association="CommunityAssistModel.FK__Donation__Person__5CD6CB2B">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Donation" EntitySet="Donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceGr__Perso__239E4DCF" Association="CommunityAssistModel.FK__ServiceGr__Perso__239E4DCF">
+            <End Role="Person" EntitySet="People" />
+            <End Role="ServiceGrant" EntitySet="ServiceGrants" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Donation">
+          <Key>
+            <PropertyRef Name="DonationKey" />
+          </Key>
+          <Property Name="DonationKey" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DonationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DonationAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="PersonKey" Type="Int32" />
+          <Property Name="EmployeeKey" Type="Int32" />
+          <Property Name="DonationConfirmDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Person" Relationship="CommunityAssistModel.FK__Donation__Person__5CD6CB2B" FromRole="Donation" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonKey" />
+          </Key>
+          <Property Name="PersonKey" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonLastName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="PersonFirstName" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="PersonUsername" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="PersonPlainPassword" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Personpasskey" Type="Int32" />
+          <Property Name="PersonEntryDate" Type="DateTime" Precision="0" />
+          <Property Name="PersonUserPassword" Type="Binary" MaxLength="500" FixedLength="false" />
+          <NavigationProperty Name="Donations" Relationship="CommunityAssistModel.FK__Donation__Person__5CD6CB2B" FromRole="Person" ToRole="Donation" />
+          <NavigationProperty Name="ServiceGrants" Relationship="CommunityAssistModel.FK__ServiceGr__Perso__239E4DCF" FromRole="Person" ToRole="ServiceGrant" />
+        </EntityType>
+        <EntityType Name="ServiceGrant">
+          <Key>
+            <PropertyRef Name="GrantKey" />
+          </Key>
+          <Property Name="GrantKey" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="GrantAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="GrantDate" Type="DateTime" Precision="3" />
+          <Property Name="PersonKey" Type="Int32" />
+          <Property Name="ServiceKey" Type="Int32" />
+          <Property Name="EmployeeKey" Type="Int32" />
+          <Property Name="GrantReviewDate" Type="DateTime" Precision="0" />
+          <Property Name="GrantApprovalStatus" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="GrantNeedExplanation" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GrantAllocation" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Person" Relationship="CommunityAssistModel.FK__ServiceGr__Perso__239E4DCF" FromRole="ServiceGrant" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK__Donation__Person__5CD6CB2B">
+          <End Role="Person" Type="CommunityAssistModel.Person" Multiplicity="0..1" />
+          <End Role="Donation" Type="CommunityAssistModel.Donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonKey" />
+            </Principal>
+            <Dependent Role="Donation">
+              <PropertyRef Name="PersonKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceGr__Perso__239E4DCF">
+          <End Role="Person" Type="CommunityAssistModel.Person" Multiplicity="0..1" />
+          <End Role="ServiceGrant" Type="CommunityAssistModel.ServiceGrant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonKey" />
+            </Principal>
+            <Dependent Role="ServiceGrant">
+              <PropertyRef Name="PersonKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CommunityAssistModelStoreContainer" CdmEntityContainer="CommunityAssistEntities">
+          <EntitySetMapping Name="Donations">
+            <EntityTypeMapping TypeName="CommunityAssistModel.Donation">
+              <MappingFragment StoreEntitySet="Donation">
+                <ScalarProperty Name="DonationKey" ColumnName="DonationKey" />
+                <ScalarProperty Name="DonationDate" ColumnName="DonationDate" />
+                <ScalarProperty Name="DonationAmount" ColumnName="DonationAmount" />
+                <ScalarProperty Name="PersonKey" ColumnName="PersonKey" />
+                <ScalarProperty Name="EmployeeKey" ColumnName="EmployeeKey" />
+                <ScalarProperty Name="DonationConfirmDate" ColumnName="DonationConfirmDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="CommunityAssistModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonKey" ColumnName="PersonKey" />
+                <ScalarProperty Name="PersonLastName" ColumnName="PersonLastName" />
+                <ScalarProperty Name="PersonFirstName" ColumnName="PersonFirstName" />
+                <ScalarProperty Name="PersonUsername" ColumnName="PersonUsername" />
+                <ScalarProperty Name="PersonPlainPassword" ColumnName="PersonPlainPassword" />
+                <ScalarProperty Name="Personpasskey" ColumnName="Personpasskey" />
+                <ScalarProperty Name="PersonEntryDate" ColumnName="PersonEntryDate" />
+                <ScalarProperty Name="PersonUserPassword" ColumnName="PersonUserPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceGrants">
+            <EntityTypeMapping TypeName="CommunityAssistModel.ServiceGrant">
+              <MappingFragment StoreEntitySet="ServiceGrant">
+                <ScalarProperty Name="GrantKey" ColumnName="GrantKey" />
+                <ScalarProperty Name="GrantAmount" ColumnName="GrantAmount" />
+                <ScalarProperty Name="GrantDate" ColumnName="GrantDate" />
+                <ScalarProperty Name="PersonKey" ColumnName="PersonKey" />
+                <ScalarProperty Name="ServiceKey" ColumnName="ServiceKey" />
+                <ScalarProperty Name="EmployeeKey" ColumnName="EmployeeKey" />
+                <ScalarProperty Name="GrantReviewDate" ColumnName="GrantReviewDate" />
+                <ScalarProperty Name="GrantApprovalStatus" ColumnName="GrantApprovalStatus" />
+                <ScalarProperty Name="GrantNeedExplanation" ColumnName="GrantNeedExplanation" />
+                <ScalarProperty Name="GrantAllocation" ColumnName="GrantAllocation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -19,7 +19,7 @@ public partial class LoginForm : System.Web.UI.Page
         {
             lblError.Text = "Welcome";
             Session["person"] = personKey;
-            Response.Redirect("Default3.aspx");
+            Response.Redirect("Default2.aspx");
         }
         else
         {
