@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <h2>Thank you</h2>
+    <h2>Welcome would you like to donate</h2>
     <p>Is this information correct?</p>
     <!--******************************************************************
             On this page we set up lables to display the vlaues from the class
